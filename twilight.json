@@ -1,0 +1,26 @@
+{
+  "name": "murshd-theme",
+  "version": "1.0.0",
+  "description": "ثيم مرشد - ثيم احترافي لبيع المنتجات الرقمية",
+  "author": "Sulaiman",
+  "license": "MIT",
+  "settings": {
+    "primary_color": "#6C5CE7",
+    "secondary_color": "#A29BFE",
+    "accent_color": "#00CEC9",
+    "bg_color": "#FAFAFA",
+    "text_color": "#2D3436",
+    "font_family": "Rubik",
+    "store_type": "digital"
+  },
+  "pages": [
+    "index",
+    "products",
+    "product",
+    "cart",
+    "checkout",
+    "thank-you",
+    "page-not-found"
+  ],
+  "locales": ["ar", "en"]
+}

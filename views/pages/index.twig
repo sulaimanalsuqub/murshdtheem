@@ -1,0 +1,85 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Hero Section #}
+    {% include 'components/hero.twig' %}
+
+    {# Features Section #}
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">لماذا تختارنا؟</h2>
+                <p class="section-subtitle">نقدم لك تجربة شراء مميزة مع منتجات رقمية عالية الجودة</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-download-cloud-line"></i>
+                    </div>
+                    <h3 class="feature-title">تحميل فوري</h3>
+                    <p class="feature-desc">احصل على منتجاتك الرقمية فوراً بعد إتمام عملية الشراء بدون أي انتظار</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h3 class="feature-title">جودة مضمونة</h3>
+                    <p class="feature-desc">جميع منتجاتنا مراجعة ومختبرة بعناية لضمان أفضل تجربة استخدام</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="ri-customer-service-2-line"></i>
+                    </div>
+                    <h3 class="feature-title">دعم متواصل</h3>
+                    <p class="feature-desc">فريق الدعم متاح لمساعدتك في أي وقت والإجابة على جميع استفساراتك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# Latest Products #}
+    <section class="section" style="background:#fff">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">أحدث المنتجات</h2>
+                <p class="section-subtitle">اكتشف آخر ما أضفناه من منتجات رقمية مميزة</p>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active">الكل</button>
+                {% for category in categories %}
+                    <button class="filter-btn" data-category="{{ category.id }}">{{ category.name }}</button>
+                {% endfor %}
+            </div>
+
+            <div class="products-grid">
+                {% for product in products %}
+                    {% include 'components/product-card.twig' with {product: product} %}
+                {% endfor %}
+            </div>
+
+            <div style="text-align:center; margin-top:48px">
+                <a href="/products" class="btn btn-outline btn-lg">
+                    عرض جميع المنتجات
+                    <i class="ri-arrow-left-line"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {# CTA Section #}
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">جاهز لتبدأ رحلتك الرقمية؟</h2>
+                <p class="cta-desc">انضم لآلاف العملاء الراضين واحصل على أفضل المنتجات الرقمية بأسعار منافسة</p>
+                <a href="/products" class="cta-btn">
+                    <i class="ri-shopping-bag-line"></i>
+                    تسوق الآن
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand -->
+            <div class="footer-brand">
+                <a href="/" class="logo">
+                    <div class="logo-icon">م</div>
+                    <span class="logo-text" style="color:#fff">{{ store.name|default('مرشد') }}</span>
+                </a>
+                <p class="footer-brand-desc">
+                    وجهتك الأولى للمنتجات الرقمية عالية الجودة. نوفر لك أفضل القوالب، التصاميم، والأدوات التي تحتاجها لتطوير أعمالك.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="تويتر"><i class="ri-twitter-x-line"></i></a>
+                    <a href="#" class="social-link" aria-label="انستقرام"><i class="ri-instagram-line"></i></a>
+                    <a href="#" class="social-link" aria-label="واتساب"><i class="ri-whatsapp-line"></i></a>
+                    <a href="#" class="social-link" aria-label="يوتيوب"><i class="ri-youtube-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="footer-title">روابط سريعة</h4>
+                <div class="footer-links">
+                    <a href="/" class="footer-link">الرئيسية</a>
+                    <a href="/products" class="footer-link">المنتجات</a>
+                    <a href="/categories" class="footer-link">الأقسام</a>
+                    <a href="/pages/about" class="footer-link">من نحن</a>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div>
+                <h4 class="footer-title">الدعم</h4>
+                <div class="footer-links">
+                    <a href="/pages/contact" class="footer-link">تواصل معنا</a>
+                    <a href="/pages/faq" class="footer-link">الأسئلة الشائعة</a>
+                    <a href="/pages/terms" class="footer-link">الشروط والأحكام</a>
+                    <a href="/pages/privacy" class="footer-link">سياسة الخصوصية</a>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 class="footer-title">تواصل معنا</h4>
+                <div class="footer-links">
+                    <span class="footer-link"><i class="ri-mail-line"></i> {{ store.email|default('info@murshd.com') }}</span>
+                    <span class="footer-link"><i class="ri-phone-line"></i> {{ store.phone|default('+966 50 000 0000') }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; {{ "now"|date("Y") }} {{ store.name|default('مرشد') }}. جميع الحقوق محفوظة</span>
+            <span>مدعوم بواسطة <a href="https://salla.com" style="color:var(--primary-light)">سلة</a></span>
+        </div>
+    </div>
+</footer>

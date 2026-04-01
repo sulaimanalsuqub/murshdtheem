@@ -1,0 +1,86 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">تواصل معنا</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>تواصل معنا</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                {# Contact Form #}
+                <div class="contact-form-wrap">
+                    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:8px">أرسل لنا رسالة</h2>
+                    <p style="color:var(--text-light);margin-bottom:32px">سنرد عليك في أقرب وقت ممكن</p>
+
+                    <form class="contact-form" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">الاسم الكامل</label>
+                                <input type="text" class="form-input" placeholder="أدخل اسمك" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-input" placeholder="example@email.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الموضوع</label>
+                            <input type="text" class="form-input" placeholder="موضوع الرسالة" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">الرسالة</label>
+                            <textarea class="form-input form-textarea" placeholder="اكتب رسالتك هنا..." rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:100%">
+                            <i class="ri-send-plane-line"></i>
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+
+                {# Contact Info #}
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-mail-line"></i>
+                        </div>
+                        <h3 class="contact-card-title">البريد الإلكتروني</h3>
+                        <p class="contact-card-text">{{ store.email|default('info@murshd.com') }}</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-phone-line"></i>
+                        </div>
+                        <h3 class="contact-card-title">الهاتف</h3>
+                        <p class="contact-card-text">{{ store.phone|default('+966 50 000 0000') }}</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-time-line"></i>
+                        </div>
+                        <h3 class="contact-card-title">ساعات العمل</h3>
+                        <p class="contact-card-text">الأحد - الخميس: 9 ص - 6 م</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="ri-chat-smile-line"></i>
+                        </div>
+                        <h3 class="contact-card-title">الدردشة المباشرة</h3>
+                        <p class="contact-card-text">متاحة خلال ساعات العمل</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">الأسئلة الشائعة</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>الأسئلة الشائعة</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width:800px">
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>كيف يمكنني تحميل المنتج بعد الشراء؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>بعد إتمام عملية الشراء، ستتمكن من تحميل المنتج مباشرة من صفحة "طلباتي" في حسابك. كما سيصلك رابط التحميل على بريدك الإلكتروني.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل يمكنني استرداد المبلغ بعد الشراء؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>نظراً لطبيعة المنتجات الرقمية، لا يمكن استرداد المبلغ بعد التحميل. لكن إذا واجهت أي مشكلة تقنية، فريق الدعم جاهز لمساعدتك.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل تتوفر تحديثات مجانية للمنتجات؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>نعم! جميع منتجاتنا تأتي مع تحديثات مجانية مدى الحياة. سيتم إشعارك عند توفر أي تحديث جديد.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>ما هي طرق الدفع المتاحة؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>نقبل الدفع عبر بطاقات الائتمان (فيزا، ماستركارد)، مدى، Apple Pay، وتحويل بنكي. جميع المعاملات مؤمنة ومشفرة.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل يمكنني استخدام المنتج في أكثر من مشروع؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>يعتمد ذلك على نوع الترخيص. الترخيص العادي يسمح بالاستخدام في مشروع واحد. للاستخدام المتعدد، يمكنك شراء الترخيص الموسع.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>كيف أتواصل مع الدعم الفني؟</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>يمكنك التواصل معنا عبر صفحة "تواصل معنا"، أو عبر البريد الإلكتروني، أو الدردشة المباشرة خلال ساعات العمل.</p>
+                    </div>
+                </div>
+            </div>
+
+            {# CTA #}
+            <div style="text-align:center;margin-top:48px;padding:40px;background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border)">
+                <h3 style="font-size:1.2rem;font-weight:600;margin-bottom:8px">لم تجد إجابة لسؤالك؟</h3>
+                <p style="color:var(--text-light);margin-bottom:20px">تواصل مع فريق الدعم وسنساعدك</p>
+                <a href="/pages/contact" class="btn btn-primary">
+                    <i class="ri-chat-smile-line"></i> تواصل معنا
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+}
+</script>
+{% endblock %}

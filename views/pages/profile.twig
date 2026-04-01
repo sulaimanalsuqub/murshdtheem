@@ -1,0 +1,102 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">حسابي</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>حسابي</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="profile-grid">
+                {# Sidebar #}
+                <div class="profile-sidebar">
+                    <div class="profile-user">
+                        <div class="profile-avatar">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        <h3 class="profile-name">{{ user.name|default('المستخدم') }}</h3>
+                        <p class="profile-email">{{ user.email|default('user@email.com') }}</p>
+                    </div>
+                    <nav class="profile-nav">
+                        <a href="/profile/orders" class="profile-nav-link active">
+                            <i class="ri-shopping-bag-line"></i> طلباتي
+                        </a>
+                        <a href="/profile/downloads" class="profile-nav-link">
+                            <i class="ri-download-cloud-line"></i> التحميلات
+                        </a>
+                        <a href="/profile/wishlist" class="profile-nav-link">
+                            <i class="ri-heart-line"></i> المفضلة
+                        </a>
+                        <a href="/profile/settings" class="profile-nav-link">
+                            <i class="ri-settings-3-line"></i> الإعدادات
+                        </a>
+                        <a href="/logout" class="profile-nav-link" style="color:#E74C3C">
+                            <i class="ri-logout-box-line"></i> تسجيل الخروج
+                        </a>
+                    </nav>
+                </div>
+
+                {# Orders Content #}
+                <div class="profile-content">
+                    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:24px">طلباتي</h2>
+
+                    {% if orders|length > 0 %}
+                        <div class="orders-list">
+                            {% for order in orders %}
+                                <div class="order-card">
+                                    <div class="order-header">
+                                        <div>
+                                            <span class="order-id">#{{ order.id }}</span>
+                                            <span class="order-date">{{ order.date }}</span>
+                                        </div>
+                                        <span class="order-status status-{{ order.status }}">
+                                            {{ order.status_text|default('مكتمل') }}
+                                        </span>
+                                    </div>
+                                    <div class="order-items">
+                                        {% for item in order.items %}
+                                            <div class="order-item">
+                                                <div class="order-item-image">
+                                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                                </div>
+                                                <div class="order-item-info">
+                                                    <h4>{{ item.product.name }}</h4>
+                                                    <span style="color:var(--text-muted);font-size:0.85rem">
+                                                        <i class="ri-file-download-line"></i> منتج رقمي
+                                                    </span>
+                                                </div>
+                                                <a href="{{ item.download_url }}" class="btn btn-primary" style="padding:8px 16px;font-size:0.85rem">
+                                                    <i class="ri-download-line"></i> تحميل
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="order-footer">
+                                        <span>الإجمالي: <strong style="color:var(--primary)">{{ order.total }} {{ order.currency|default('ر.س') }}</strong></span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state" style="padding:40px 20px">
+                            <div class="empty-state-icon"><i class="ri-file-list-line"></i></div>
+                            <h3 class="empty-state-title">لا توجد طلبات بعد</h3>
+                            <p class="empty-state-desc">ابدأ بشراء منتجاتنا الرقمية المميزة</p>
+                            <a href="/products" class="btn btn-primary">تصفح المنتجات</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{# Product Card Component #}
+{# Usage: {% include 'components/product-card.twig' with {product: product} %} #}
+
+<div class="product-card">
+    {% if product.promotion_title %}
+        <span class="product-badge">{{ product.promotion_title }}</span>
+    {% endif %}
+
+    <a href="{{ product.url }}" class="product-image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+        <div class="product-overlay">
+            <button class="overlay-btn" onclick="event.preventDefault(); salla.wishlist.toggle({{ product.id }})" aria-label="أضف للمفضلة">
+                <i class="ri-heart-line"></i>
+            </button>
+            <button class="overlay-btn" onclick="event.preventDefault(); window.location='{{ product.url }}'" aria-label="عرض التفاصيل">
+                <i class="ri-eye-line"></i>
+            </button>
+        </div>
+    </a>
+
+    <div class="product-info">
+        <span class="product-category">{{ product.category.name|default('منتج رقمي') }}</span>
+        <h3 class="product-name">
+            <a href="{{ product.url }}">{{ product.name }}</a>
+        </h3>
+        <div class="product-meta">
+            <span><i class="ri-download-cloud-line"></i> تحميل فوري</span>
+            {% if product.rating %}
+                <span><i class="ri-star-fill" style="color:#F1C40F"></i> {{ product.rating }}</span>
+            {% endif %}
+        </div>
+        <div class="product-footer">
+            <div class="product-price">
+                {% if product.sale_price %}
+                    <span class="old-price">{{ product.regular_price }} {{ product.currency }}</span>
+                {% endif %}
+                {{ product.price }} <span class="currency">{{ product.currency|default('ر.س') }}</span>
+            </div>
+            <button class="add-to-cart-btn" onclick="salla.cart.addItem({id: {{ product.id }}, quantity: 1})">
+                <i class="ri-shopping-bag-line"></i>
+                أضف
+            </button>
+        </div>
+    </div>
+</div>

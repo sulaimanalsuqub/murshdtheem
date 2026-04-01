@@ -1,0 +1,19 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <section class="section" style="min-height:60vh; display:flex; align-items:center">
+        <div class="container">
+            <div class="empty-state">
+                <div style="font-size:6rem; font-weight:700; color:var(--primary-light); margin-bottom:8px">404</div>
+                <h2 class="empty-state-title" style="font-size:1.5rem">الصفحة غير موجودة</h2>
+                <p class="empty-state-desc">عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها</p>
+                <a href="/" class="btn btn-primary btn-lg">
+                    <i class="ri-home-line"></i>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

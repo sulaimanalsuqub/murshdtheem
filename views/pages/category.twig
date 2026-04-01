@@ -1,0 +1,71 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">{{ category.name|default('القسم') }}</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/categories">الأقسام</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>{{ category.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    {# Category Description #}
+    {% if category.description %}
+        <section style="padding:32px 0 0">
+            <div class="container">
+                <p style="text-align:center;color:var(--text-light);max-width:600px;margin:0 auto;font-size:1.05rem">
+                    {{ category.description }}
+                </p>
+            </div>
+        </section>
+    {% endif %}
+
+    {# Products #}
+    <section class="section">
+        <div class="container">
+            {# Sub-categories #}
+            {% if category.children|length > 0 %}
+                <div class="filter-bar">
+                    <a href="{{ category.url }}" class="filter-btn active">الكل</a>
+                    {% for child in category.children %}
+                        <a href="{{ child.url }}" class="filter-btn">{{ child.name }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if products|length > 0 %}
+                <div class="products-grid">
+                    {% for product in products %}
+                        {% include 'components/product-card.twig' with {product: product} %}
+                    {% endfor %}
+                </div>
+
+                {% if pagination %}
+                    <div style="display:flex; justify-content:center; gap:8px; margin-top:48px">
+                        {% if pagination.prev_page %}
+                            <a href="{{ pagination.prev_page }}" class="btn btn-outline"><i class="ri-arrow-right-line"></i> السابق</a>
+                        {% endif %}
+                        {% if pagination.next_page %}
+                            <a href="{{ pagination.next_page }}" class="btn btn-primary">التالي <i class="ri-arrow-left-line"></i></a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-folder-open-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد منتجات في هذا القسم</h3>
+                    <p class="empty-state-desc">سيتم إضافة منتجات جديدة قريباً</p>
+                    <a href="/products" class="btn btn-primary">تصفح جميع المنتجات</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
