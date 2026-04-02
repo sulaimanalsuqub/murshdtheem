@@ -1,0 +1,129 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Breadcrumb #}
+    <div class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/products">المنتجات</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>{{ product.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    {# Product Detail #}
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-detail-grid">
+                {# Gallery #}
+                <div class="product-gallery">
+                    <div class="product-main-image">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" id="mainImage">
+                    </div>
+                    {% if product.images|length > 1 %}
+                        <div class="product-thumbnails">
+                            {% for image in product.images %}
+                                <div class="product-thumb {% if loop.first %}active{% endif %}" onclick="changeImage(this, '{{ image.url }}')">
+                                    <img src="{{ image.url }}" alt="{{ product.name }}">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Details #}
+                <div class="product-details-content">
+                    <div class="product-detail-badge">
+                        <i class="ri-file-download-line"></i>
+                        منتج رقمي
+                    </div>
+
+                    <h1 class="product-detail-title">{{ product.name }}</h1>
+
+                    <p class="product-detail-desc">{{ product.description|striptags|slice(0, 300) }}</p>
+
+                    <div class="product-detail-price">
+                        {% if product.sale_price %}
+                            <span style="font-size:1.1rem;color:var(--text-muted);text-decoration:line-through;font-weight:400;margin-left:12px">
+                                {{ product.regular_price }} {{ product.currency }}
+                            </span>
+                        {% endif %}
+                        {{ product.price }} <span class="currency">{{ product.currency|default('ر.س') }}</span>
+                    </div>
+
+                    {# Product Features #}
+                    <div class="product-features-list">
+                        <div class="product-feature-item">
+                            <i class="ri-download-cloud-line"></i>
+                            <span>تحميل فوري بعد الدفع</span>
+                        </div>
+                        <div class="product-feature-item">
+                            <i class="ri-refresh-line"></i>
+                            <span>تحديثات مجانية مدى الحياة</span>
+                        </div>
+                        <div class="product-feature-item">
+                            <i class="ri-customer-service-line"></i>
+                            <span>دعم فني متواصل</span>
+                        </div>
+                        <div class="product-feature-item">
+                            <i class="ri-file-text-line"></i>
+                            <span>ترخيص استخدام كامل</span>
+                        </div>
+                    </div>
+
+                    {# Actions #}
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-lg" onclick="salla.cart.addItem({id: {{ product.id }}, quantity: 1})" style="flex:2">
+                            <i class="ri-shopping-bag-line"></i>
+                            أضف إلى السلة
+                        </button>
+                        <button class="btn btn-outline btn-lg btn-icon" onclick="salla.wishlist.toggle({{ product.id }})" aria-label="أضف للمفضلة">
+                            <i class="ri-heart-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {# Full Description #}
+            {% if product.description %}
+                <div style="margin-top:64px; padding-top:48px; border-top:1px solid var(--border)">
+                    <h2 class="section-title" style="text-align:right; margin-bottom:24px">تفاصيل المنتج</h2>
+                    <div style="color:var(--text-light); line-height:2; font-size:1rem">
+                        {{ product.description|raw }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {# Related Products #}
+    {% if related_products|length > 0 %}
+        <section class="section" style="background:#fff">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">منتجات ذات صلة</h2>
+                </div>
+                <div class="products-grid">
+                    {% for product in related_products|slice(0, 4) %}
+                        {% include 'components/product-card.twig' with {product: product} %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function changeImage(thumb, url) {
+    document.getElementById('mainImage').src = url;
+    document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+}
+</script>
+{% endblock %}

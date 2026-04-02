@@ -1,0 +1,77 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">حسابي</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>حسابي</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div style="display:grid;grid-template-columns:280px 1fr;gap:32px;align-items:start">
+                {# Sidebar #}
+                <aside style="background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;position:sticky;top:100px">
+                    <div style="padding:32px;text-align:center;background:linear-gradient(135deg,rgba(108,92,231,0.05),rgba(0,206,201,0.05));border-bottom:1px solid var(--border)">
+                        <div style="width:72px;height:72px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.5rem">
+                            {% if customer.avatar %}
+                                <img src="{{ customer.avatar }}" alt="{{ customer.name }}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">
+                            {% else %}
+                                <i class="ri-user-line"></i>
+                            {% endif %}
+                        </div>
+                        <h3 style="font-weight:600;font-size:1.1rem">{{ customer.name|default('المستخدم') }}</h3>
+                        <p style="font-size:0.85rem;color:var(--text-muted)">{{ customer.email }}</p>
+                    </div>
+                    <nav style="padding:12px">
+                        <a href="/profile" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.95rem;font-weight:500;background:rgba(108,92,231,0.08);color:var(--primary)">
+                            <i class="ri-user-settings-line"></i> الملف الشخصي
+                        </a>
+                        <a href="/profile/orders" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.95rem;color:var(--text-light)">
+                            <i class="ri-shopping-bag-line"></i> طلباتي
+                        </a>
+                        <a href="/profile/wishlist" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.95rem;color:var(--text-light)">
+                            <i class="ri-heart-line"></i> المفضلة
+                        </a>
+                        <a href="/profile/notifications" style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:var(--radius-sm);font-size:0.95rem;color:var(--text-light)">
+                            <i class="ri-notification-line"></i> الإشعارات
+                        </a>
+                    </nav>
+                </aside>
+
+                {# Profile Form #}
+                <div style="background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border);padding:32px">
+                    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border)">الملف الشخصي</h2>
+                    <form>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+                            <div class="form-group">
+                                <label class="form-label">الاسم الأول</label>
+                                <input type="text" class="form-input" value="{{ customer.first_name }}" placeholder="الاسم الأول">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">الاسم الأخير</label>
+                                <input type="text" class="form-input" value="{{ customer.last_name }}" placeholder="الاسم الأخير">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:20px">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-input" value="{{ customer.email }}" placeholder="البريد الإلكتروني">
+                        </div>
+                        <div class="form-group" style="margin-top:20px">
+                            <label class="form-label">رقم الجوال</label>
+                            <input type="tel" class="form-input" value="{{ customer.phone }}" placeholder="05xxxxxxxx">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:24px"><i class="ri-save-line"></i> حفظ التعديلات</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

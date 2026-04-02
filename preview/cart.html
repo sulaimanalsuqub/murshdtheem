@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات - مرشد</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="../preview.html" class="logo"><div class="logo-icon">م</div><span class="logo-text">مرشد</span></a>
+                <nav class="nav" id="mainNav">
+                    <a href="../preview.html" class="nav-link">الرئيسية</a>
+                    <a href="products.html" class="nav-link">المنتجات</a>
+                    <a href="about.html" class="nav-link">من نحن</a>
+                    <a href="contact.html" class="nav-link">تواصل معنا</a>
+                    <a href="faq.html" class="nav-link">الأسئلة الشائعة</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="cart-btn"><i class="ri-search-line"></i></button>
+                    <a href="cart.html" class="cart-btn"><i class="ri-shopping-bag-line"></i><span class="cart-count">3</span></a>
+                    <a href="login.html" class="cart-btn"><i class="ri-user-line"></i></a>
+                    <button class="menu-toggle" id="menuToggle"><i class="ri-menu-line"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">سلة المشتريات</h1>
+            <div class="breadcrumb">
+                <a href="../preview.html">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>سلة المشتريات</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="cart-page">
+        <div class="container">
+            <div class="cart-grid">
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <div class="cart-item-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#6C5CE7,#A29BFE);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem"><i class="ri-layout-masonry-line"></i></div></div>
+                        <div class="cart-item-info"><h3 class="cart-item-name">قالب لوحة تحكم احترافية</h3><span class="cart-item-type"><i class="ri-file-download-line"></i> منتج رقمي</span></div>
+                        <div class="cart-item-price">199 ر.س</div>
+                        <button class="cart-item-remove"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-item-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#00CEC9,#55EFC4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem"><i class="ri-palette-line"></i></div></div>
+                        <div class="cart-item-info"><h3 class="cart-item-name">حزمة تصاميم سوشيال ميديا</h3><span class="cart-item-type"><i class="ri-file-download-line"></i> منتج رقمي</span></div>
+                        <div class="cart-item-price">149 ر.س</div>
+                        <button class="cart-item-remove"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-item-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,#FD79A8,#E84393);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem"><i class="ri-font-size-2"></i></div></div>
+                        <div class="cart-item-info"><h3 class="cart-item-name">حزمة خطوط عربية احترافية</h3><span class="cart-item-type"><i class="ri-file-download-line"></i> منتج رقمي</span></div>
+                        <div class="cart-item-price">79 ر.س</div>
+                        <button class="cart-item-remove"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <h3 class="cart-summary-title">ملخص الطلب</h3>
+                    <div class="cart-summary-row"><span class="label">المجموع الفرعي</span><span class="value">427 ر.س</span></div>
+                    <div class="cart-summary-row"><span class="label">الضريبة (15%)</span><span class="value">64.05 ر.س</span></div>
+                    <div class="cart-summary-total"><span>الإجمالي</span><span class="value">491.05 ر.س</span></div>
+                    <div style="margin-top:20px;display:flex;gap:8px">
+                        <input type="text" placeholder="كود الخصم" style="flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font)">
+                        <button class="btn btn-outline">تطبيق</button>
+                    </div>
+                    <button class="btn btn-primary checkout-btn"><i class="ri-lock-line"></i> إتمام الشراء</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom"><span>&copy; 2026 مرشد. جميع الحقوق محفوظة</span><span>مدعوم بواسطة <a href="#" style="color:var(--primary-light)">سلة</a></span></div>
+        </div>
+    </footer>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

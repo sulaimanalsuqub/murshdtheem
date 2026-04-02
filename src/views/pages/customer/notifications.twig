@@ -1,0 +1,46 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">الإشعارات</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile">حسابي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>الإشعارات</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width:800px">
+            {% if notifications|length > 0 %}
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    {% for notification in notifications %}
+                        <div class="cart-item" style="{% if not notification.read %}border-right:3px solid var(--primary){% endif %}">
+                            <div style="width:44px;height:44px;border-radius:50%;background:{% if not notification.read %}rgba(108,92,231,0.1){% else %}var(--border){% endif %};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                                <i class="ri-notification-line" style="color:{% if not notification.read %}var(--primary){% else %}var(--text-muted){% endif %}"></i>
+                            </div>
+                            <div class="cart-item-info">
+                                <h3 class="cart-item-name" style="{% if not notification.read %}font-weight:700{% endif %}">{{ notification.title }}</h3>
+                                <p style="font-size:0.85rem;color:var(--text-light);margin-top:4px">{{ notification.message }}</p>
+                                <span class="cart-item-type" style="margin-top:4px">{{ notification.created_at }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-notification-off-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد إشعارات</h3>
+                    <p class="empty-state-desc">ستظهر الإشعارات هنا عند وجود تحديثات جديدة</p>
+                    <a href="/" class="btn btn-primary">العودة للرئيسية</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

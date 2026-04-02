@@ -1,0 +1,44 @@
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <div class="logo-icon">م</div>
+                <span class="logo-text">{{ store.name|default('مرشد') }}</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="nav" id="mainNav">
+                <a href="/" class="nav-link active">الرئيسية</a>
+                <a href="/products" class="nav-link">المنتجات</a>
+                <a href="/categories" class="nav-link">الأقسام</a>
+                <a href="/pages/about" class="nav-link">من نحن</a>
+                <a href="/pages/contact" class="nav-link">تواصل معنا</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="header-actions">
+                <!-- Search -->
+                <button class="cart-btn" aria-label="بحث">
+                    <i class="ri-search-line"></i>
+                </button>
+
+                <!-- Cart -->
+                <button class="cart-btn" onclick="salla.cart.open()" aria-label="سلة المشتريات">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+
+                <!-- User -->
+                <button class="cart-btn" aria-label="حسابي">
+                    <i class="ri-user-line"></i>
+                </button>
+
+                <!-- Mobile Toggle -->
+                <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                    <i class="ri-menu-line"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>

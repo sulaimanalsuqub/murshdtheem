@@ -1,0 +1,99 @@
+{
+    "common": {
+        "home": "Home",
+        "products": "Products",
+        "categories": "Categories",
+        "about": "About Us",
+        "contact": "Contact Us",
+        "search": "Search",
+        "cart": "Cart",
+        "my_account": "My Account",
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "currency": "SAR",
+        "all": "All",
+        "loading": "Loading...",
+        "no_results": "No results found",
+        "view_all": "View All",
+        "back_home": "Back to Home"
+    },
+    "product": {
+        "add_to_cart": "Add to Cart",
+        "buy_now": "Buy Now",
+        "add_to_wishlist": "Add to Wishlist",
+        "digital_product": "Digital Product",
+        "instant_download": "Instant Download",
+        "free_updates": "Free Updates",
+        "support": "Technical Support",
+        "full_license": "Full License",
+        "details": "Product Details",
+        "related": "Related Products",
+        "reviews": "Reviews",
+        "instant_download_desc": "Instant download after payment",
+        "free_updates_desc": "Free lifetime updates",
+        "support_desc": "Continuous technical support",
+        "license_desc": "Full usage license"
+    },
+    "cart": {
+        "title": "Shopping Cart",
+        "empty": "Your cart is empty",
+        "empty_desc": "Start browsing our digital products",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "tax": "Tax",
+        "total": "Total",
+        "coupon_placeholder": "Discount code",
+        "apply_coupon": "Apply",
+        "checkout": "Checkout",
+        "continue_shopping": "Continue Shopping",
+        "order_summary": "Order Summary",
+        "remove": "Remove"
+    },
+    "checkout": {
+        "success_title": "Purchase Successful!",
+        "success_desc": "Thank you! You can download your products from My Orders",
+        "order_number": "Order Number",
+        "download_products": "Download Products"
+    },
+    "hero": {
+        "badge": "Professional Digital Products",
+        "title": "Discover the Best Digital Products for Your Business",
+        "desc": "We provide a curated collection of templates, designs, and digital tools crafted professionally",
+        "browse_products": "Browse Products",
+        "about_us": "About Us",
+        "stat_products": "Digital Products",
+        "stat_customers": "Happy Customers",
+        "stat_rating": "Customer Rating"
+    },
+    "features": {
+        "title": "Why Choose Us?",
+        "subtitle": "We offer a premium buying experience with high-quality digital products",
+        "instant_download": "Instant Download",
+        "instant_download_desc": "Get your products immediately after purchase",
+        "quality": "Guaranteed Quality",
+        "quality_desc": "All products are carefully reviewed and tested",
+        "support": "Continuous Support",
+        "support_desc": "Our support team is available to help you anytime"
+    },
+    "footer": {
+        "desc": "Your destination for premium digital products",
+        "quick_links": "Quick Links",
+        "support": "Support",
+        "faq": "FAQ",
+        "terms": "Terms & Conditions",
+        "privacy": "Privacy Policy",
+        "contact_us": "Contact Us",
+        "rights": "All rights reserved",
+        "powered_by": "Powered by"
+    },
+    "errors": {
+        "404_title": "Page Not Found",
+        "404_desc": "Sorry, the page you're looking for doesn't exist"
+    },
+    "toast": {
+        "added_to_cart": "Added to cart successfully",
+        "add_error": "Error adding item",
+        "added_to_wishlist": "Added to wishlist"
+    }
+}

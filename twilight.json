@@ -15,12 +15,22 @@
   },
   "pages": [
     "index",
-    "products",
-    "product",
     "cart",
-    "checkout",
     "thank-you",
-    "page-not-found"
+    "loyalty",
+    "page-single",
+    "product/index",
+    "product/single",
+    "blog/index",
+    "blog/single",
+    "brands/index",
+    "brands/single",
+    "customer/profile",
+    "customer/notifications",
+    "customer/wishlist",
+    "customer/orders/index",
+    "customer/orders/single",
+    "404"
   ],
   "locales": ["ar", "en"]
 }

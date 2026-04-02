@@ -1,0 +1,63 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">طلباتي</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile">حسابي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>طلباتي</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width:900px">
+            {% if orders|length > 0 %}
+                <div style="display:flex;flex-direction:column;gap:20px">
+                    {% for order in orders %}
+                        <a href="{{ order.url }}" style="display:block;background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;transition:var(--transition)">
+                            <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border)">
+                                <div style="display:flex;align-items:center;gap:16px">
+                                    <span style="font-weight:700;color:var(--primary)">طلب #{{ order.id }}</span>
+                                    <span style="font-size:0.85rem;color:var(--text-muted)">{{ order.date }}</span>
+                                </div>
+                                <span style="padding:6px 14px;border-radius:50px;font-size:0.8rem;font-weight:500;
+                                    {% if order.status == 'completed' %}background:rgba(0,206,201,0.1);color:var(--accent)
+                                    {% elseif order.status == 'pending' %}background:rgba(253,203,110,0.2);color:#F39C12
+                                    {% elseif order.status == 'cancelled' %}background:rgba(231,76,60,0.1);color:#E74C3C
+                                    {% else %}background:rgba(108,92,231,0.1);color:var(--primary){% endif %}">
+                                    {{ order.status_label|default(order.status) }}
+                                </span>
+                            </div>
+                            <div style="padding:20px 24px;display:flex;align-items:center;justify-content:space-between">
+                                <div style="display:flex;align-items:center;gap:8px;color:var(--text-light);font-size:0.9rem">
+                                    <i class="ri-file-list-line"></i>
+                                    <span>{{ order.items_count|default(order.items|length) }} منتج</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:16px">
+                                    <span style="font-weight:700;font-size:1.1rem;color:var(--primary)">{{ order.total }} {{ order.currency|default('ر.س') }}</span>
+                                    <i class="ri-arrow-left-s-line" style="color:var(--text-muted)"></i>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-shopping-bag-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد طلبات</h3>
+                    <p class="empty-state-desc">لم تقم بأي طلبات بعد، ابدأ التسوق الآن!</p>
+                    <a href="/products" class="btn btn-primary btn-lg">
+                        <i class="ri-shopping-bag-line"></i> تصفح المنتجات
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

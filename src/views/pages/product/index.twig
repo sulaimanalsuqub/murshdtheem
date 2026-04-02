@@ -1,0 +1,64 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">المنتجات</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>المنتجات</span>
+            </div>
+        </div>
+    </div>
+
+    {# Products Section #}
+    <section class="section">
+        <div class="container">
+            {# Filter Bar #}
+            <div class="filter-bar">
+                <button class="filter-btn active">الكل</button>
+                {% for category in categories %}
+                    <a href="/products?category={{ category.id }}" class="filter-btn">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+
+            {# Products Grid #}
+            {% if products|length > 0 %}
+                <div class="products-grid">
+                    {% for product in products %}
+                        {% include 'components/product-card.twig' with {product: product} %}
+                    {% endfor %}
+                </div>
+
+                {# Pagination #}
+                {% if pagination %}
+                    <div style="display:flex; justify-content:center; gap:8px; margin-top:48px">
+                        {% if pagination.prev_page %}
+                            <a href="{{ pagination.prev_page }}" class="btn btn-outline">
+                                <i class="ri-arrow-right-line"></i> السابق
+                            </a>
+                        {% endif %}
+                        {% if pagination.next_page %}
+                            <a href="{{ pagination.next_page }}" class="btn btn-primary">
+                                التالي <i class="ri-arrow-left-line"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="ri-shopping-bag-line"></i>
+                    </div>
+                    <h3 class="empty-state-title">لا توجد منتجات حالياً</h3>
+                    <p class="empty-state-desc">سيتم إضافة منتجات جديدة قريباً، تابعنا!</p>
+                    <a href="/" class="btn btn-primary">العودة للرئيسية</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

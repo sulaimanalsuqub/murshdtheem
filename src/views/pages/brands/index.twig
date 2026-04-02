@@ -1,0 +1,46 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">العلامات التجارية</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>العلامات التجارية</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            {% if brands|length > 0 %}
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:24px">
+                    {% for brand in brands %}
+                        <a href="{{ brand.url }}" class="feature-card" style="text-align:center;padding:32px 20px">
+                            {% if brand.logo %}
+                                <img src="{{ brand.logo }}" alt="{{ brand.name }}" style="width:80px;height:80px;object-fit:contain;margin:0 auto 16px;border-radius:var(--radius-sm)">
+                            {% else %}
+                                <div style="width:80px;height:80px;border-radius:var(--radius-sm);background:linear-gradient(135deg,rgba(108,92,231,0.1),rgba(0,206,201,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.5rem;color:var(--primary)">
+                                    <i class="ri-building-line"></i>
+                                </div>
+                            {% endif %}
+                            <h3 class="feature-title" style="font-size:1rem">{{ brand.name }}</h3>
+                            {% if brand.products_count %}
+                                <p class="feature-desc" style="font-size:0.8rem">{{ brand.products_count }} منتج</p>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-building-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد علامات تجارية حالياً</h3>
+                    <a href="/" class="btn btn-primary">العودة للرئيسية</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

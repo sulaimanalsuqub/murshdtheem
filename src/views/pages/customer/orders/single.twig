@@ -1,0 +1,93 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile">حسابي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile/orders">طلباتي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>طلب #{{ order.id }}</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width:900px">
+            {# Order Header #}
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px">
+                <div>
+                    <h1 style="font-size:1.5rem;font-weight:700">طلب #{{ order.id }}</h1>
+                    <p style="color:var(--text-muted);font-size:0.9rem;margin-top:4px">{{ order.date }}</p>
+                </div>
+                <span style="padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:500;
+                    {% if order.status == 'completed' %}background:rgba(0,206,201,0.1);color:var(--accent)
+                    {% elseif order.status == 'pending' %}background:rgba(253,203,110,0.2);color:#F39C12
+                    {% else %}background:rgba(108,92,231,0.1);color:var(--primary){% endif %}">
+                    {{ order.status_label|default(order.status) }}
+                </span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start">
+                {# Order Items #}
+                <div>
+                    <div style="background:var(--bg-card);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden">
+                        <h3 style="padding:20px 24px;font-size:1rem;font-weight:700;border-bottom:1px solid var(--border)">المنتجات</h3>
+                        {% for item in order.items %}
+                            <div style="display:flex;align-items:center;gap:16px;padding:16px 24px;{% if not loop.last %}border-bottom:1px solid var(--border){% endif %}">
+                                <div style="width:64px;height:52px;border-radius:var(--radius-sm);overflow:hidden;background:linear-gradient(135deg,#F8F7FF,#F0EFFF);flex-shrink:0">
+                                    {% if item.product.image %}
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width:100%;height:100%;object-fit:cover">
+                                    {% endif %}
+                                </div>
+                                <div style="flex:1">
+                                    <h4 style="font-size:0.95rem;font-weight:600">{{ item.product.name }}</h4>
+                                    <span style="font-size:0.8rem;color:var(--text-muted)">الكمية: {{ item.quantity }}</span>
+                                </div>
+                                <span style="font-weight:600;color:var(--primary);white-space:nowrap">{{ item.price }} {{ order.currency|default('ر.س') }}</span>
+                                {% if order.status == 'completed' %}
+                                    <button class="btn btn-primary" style="padding:8px 14px;font-size:0.8rem"><i class="ri-download-line"></i> تحميل</button>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {# Order Summary #}
+                <div class="cart-summary">
+                    <h3 class="cart-summary-title">ملخص الطلب</h3>
+                    <div class="cart-summary-row">
+                        <span class="label">المجموع الفرعي</span>
+                        <span class="value">{{ order.sub_total }} {{ order.currency|default('ر.س') }}</span>
+                    </div>
+                    {% if order.discount %}
+                        <div class="cart-summary-row">
+                            <span class="label">الخصم</span>
+                            <span class="value" style="color:var(--accent)">- {{ order.discount }} {{ order.currency|default('ر.س') }}</span>
+                        </div>
+                    {% endif %}
+                    {% if order.tax %}
+                        <div class="cart-summary-row">
+                            <span class="label">الضريبة</span>
+                            <span class="value">{{ order.tax }} {{ order.currency|default('ر.س') }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="cart-summary-total">
+                        <span>الإجمالي</span>
+                        <span class="value">{{ order.total }} {{ order.currency|default('ر.س') }}</span>
+                    </div>
+                    {% if order.payment_method %}
+                        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:0.9rem;color:var(--text-light)">
+                            <i class="ri-bank-card-line"></i> {{ order.payment_method }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

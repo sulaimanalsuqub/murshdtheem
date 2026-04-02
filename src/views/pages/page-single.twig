@@ -1,0 +1,26 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Page Header #}
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">{{ page.title }}</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>{{ page.title }}</span>
+            </div>
+        </div>
+    </div>
+
+    {# Page Content #}
+    <section class="section">
+        <div class="container" style="max-width:800px">
+            <div class="page-content" style="color:var(--text-light); line-height:2; font-size:1rem">
+                {{ page.content|raw }}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

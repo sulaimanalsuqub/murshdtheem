@@ -1,0 +1,39 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">المفضلة</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile">حسابي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>المفضلة</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            {% if wishlist_products|length > 0 %}
+                <div class="products-grid">
+                    {% for product in wishlist_products %}
+                        {% include 'components/product-card.twig' with {product: product} %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-heart-line"></i></div>
+                    <h3 class="empty-state-title">قائمة المفضلة فارغة</h3>
+                    <p class="empty-state-desc">أضف المنتجات التي تعجبك وستظهر هنا</p>
+                    <a href="/products" class="btn btn-primary btn-lg">
+                        <i class="ri-shopping-bag-line"></i> تصفح المنتجات
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

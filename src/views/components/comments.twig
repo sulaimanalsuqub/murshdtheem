@@ -1,0 +1,59 @@
+{# Comments Component #}
+{# Used in blog posts and product pages #}
+
+<div class="comments-section" style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border)">
+    <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:24px">
+        التعليقات
+        {% if comments|length > 0 %}
+            <span style="font-size:0.85rem;font-weight:400;color:var(--text-muted)">({{ comments|length }})</span>
+        {% endif %}
+    </h3>
+
+    {# Comment Form #}
+    <div style="background:var(--bg-card);border-radius:var(--radius-md);padding:24px;border:1px solid var(--border);margin-bottom:32px">
+        <form>
+            <div class="form-group">
+                <textarea class="form-input form-textarea" placeholder="اكتب تعليقك هنا..." rows="4" style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font);resize:vertical"></textarea>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+                <div style="display:flex;align-items:center;gap:4px">
+                    {% for i in 1..5 %}
+                        <button type="button" class="rating-star" data-rate="{{ i }}" style="background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--border);padding:2px">
+                            <i class="ri-star-fill"></i>
+                        </button>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary" style="padding:10px 24px"><i class="ri-send-plane-line"></i> إرسال</button>
+            </div>
+        </form>
+    </div>
+
+    {# Comments List #}
+    {% if comments|length > 0 %}
+        <div style="display:flex;flex-direction:column;gap:20px">
+            {% for comment in comments %}
+                <div style="display:flex;gap:16px">
+                    <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary-light),var(--primary));color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:600;flex-shrink:0">
+                        {{ comment.author.name|first|upper }}
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+                            <span style="font-weight:600;font-size:0.95rem">{{ comment.author.name }}</span>
+                            <span style="font-size:0.8rem;color:var(--text-muted)">{{ comment.date }}</span>
+                        </div>
+                        {% if comment.rating %}
+                            <div style="display:flex;gap:2px;margin-bottom:8px">
+                                {% for i in 1..5 %}
+                                    <i class="ri-star-fill" style="font-size:0.85rem;color:{% if i <= comment.rating %}#F1C40F{% else %}var(--border){% endif %}"></i>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <p style="color:var(--text-light);line-height:1.7;font-size:0.95rem">{{ comment.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align:center;color:var(--text-muted);padding:24px">لا توجد تعليقات بعد. كن أول من يعلق!</p>
+    {% endif %}
+</div>

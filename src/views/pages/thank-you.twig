@@ -1,0 +1,33 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <section class="section" style="min-height:60vh; display:flex; align-items:center">
+        <div class="container">
+            <div class="empty-state">
+                <div style="width:100px; height:100px; border-radius:50%; background:rgba(0,206,201,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:2.5rem; color:var(--accent)">
+                    <i class="ri-check-double-line"></i>
+                </div>
+                <h2 class="empty-state-title" style="font-size:1.8rem">تم الشراء بنجاح!</h2>
+                <p class="empty-state-desc" style="max-width:400px; margin:12px auto 8px">
+                    شكراً لك! تم إتمام طلبك بنجاح. يمكنك الآن تحميل منتجاتك الرقمية من صفحة طلباتي.
+                </p>
+                {% if order %}
+                    <p style="color:var(--text-muted); margin-bottom:32px">
+                        رقم الطلب: <strong style="color:var(--primary)">#{{ order.id }}</strong>
+                    </p>
+                {% endif %}
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+                    <a href="/profile/orders" class="btn btn-primary btn-lg">
+                        <i class="ri-download-cloud-line"></i>
+                        تحميل المنتجات
+                    </a>
+                    <a href="/products" class="btn btn-outline btn-lg">
+                        متابعة التسوق
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/blog">المدونة</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>{{ post.title }}</span>
+            </div>
+        </div>
+    </div>
+
+    <article class="section">
+        <div class="container" style="max-width:800px">
+            {# Post Header #}
+            <header style="margin-bottom:32px">
+                {% if post.category %}
+                    <span style="display:inline-block;padding:6px 14px;background:rgba(108,92,231,0.1);color:var(--primary);border-radius:50px;font-size:0.8rem;font-weight:500;margin-bottom:16px">
+                        {{ post.category.name }}
+                    </span>
+                {% endif %}
+                <h1 style="font-size:2.2rem;font-weight:700;line-height:1.3;margin-bottom:16px">{{ post.title }}</h1>
+                <div style="display:flex;align-items:center;gap:16px;color:var(--text-muted);font-size:0.9rem">
+                    <span><i class="ri-calendar-line"></i> {{ post.date }}</span>
+                    {% if post.author %}
+                        <span><i class="ri-user-line"></i> {{ post.author.name }}</span>
+                    {% endif %}
+                </div>
+            </header>
+
+            {# Featured Image #}
+            {% if post.image %}
+                <div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:32px;aspect-ratio:16/9">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width:100%;height:100%;object-fit:cover">
+                </div>
+            {% endif %}
+
+            {# Post Content #}
+            <div style="color:var(--text-light);line-height:2;font-size:1.05rem">
+                {{ post.content|raw }}
+            </div>
+
+            {# Share #}
+            <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px">
+                <span style="font-weight:600">شارك المقال:</span>
+                <a href="https://twitter.com/intent/tweet?url={{ post.url }}" target="_blank" class="social-link" style="background:rgba(108,92,231,0.1);color:var(--primary)"><i class="ri-twitter-x-line"></i></a>
+                <a href="https://wa.me/?text={{ post.url }}" target="_blank" class="social-link" style="background:rgba(0,206,201,0.1);color:var(--accent)"><i class="ri-whatsapp-line"></i></a>
+            </div>
+
+            {# Comments #}
+            {% include 'components/comments.twig' %}
+        </div>
+    </article>
+
+{% endblock %}
