@@ -1,0 +1,68 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title">المحفظة</h1>
+            <div class="breadcrumb">
+                <a href="/">الرئيسية</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <a href="/profile">حسابي</a>
+                <span class="separator"><i class="ri-arrow-left-s-line"></i></span>
+                <span>المحفظة</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container" style="max-width:800px">
+            {# Wallet Balance #}
+            <div style="background:linear-gradient(135deg,var(--primary),#8B7CF8);border-radius:var(--radius-xl);padding:40px;text-align:center;color:#fff;margin-bottom:40px;position:relative;overflow:hidden">
+                <div style="position:absolute;top:-60px;left:-60px;width:200px;height:200px;background:rgba(255,255,255,0.05);border-radius:50%"></div>
+                <div style="position:relative;z-index:1">
+                    <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.5rem">
+                        <i class="ri-wallet-3-line"></i>
+                    </div>
+                    <p style="opacity:0.8;font-size:0.9rem;margin-bottom:8px">رصيدك الحالي</p>
+                    <div style="font-size:2.8rem;font-weight:700">
+                        {{ wallet.balance|default('0.00') }}
+                        <span style="font-size:1rem;opacity:0.8">{{ store.currency|default('ر.س') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {# Transactions #}
+            <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:20px">سجل المعاملات</h2>
+
+            {% if wallet.transactions|length > 0 %}
+                <div style="display:flex;flex-direction:column;gap:12px">
+                    {% for transaction in wallet.transactions %}
+                        <div class="cart-item">
+                            <div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+                                {% if transaction.type == 'credit' %}background:rgba(0,206,201,0.1){% else %}background:rgba(231,76,60,0.1){% endif %}">
+                                <i class="{% if transaction.type == 'credit' %}ri-arrow-down-line{% else %}ri-arrow-up-line{% endif %}"
+                                   style="font-size:1.2rem;{% if transaction.type == 'credit' %}color:var(--accent){% else %}color:#E74C3C{% endif %}"></i>
+                            </div>
+                            <div class="cart-item-info">
+                                <h3 class="cart-item-name">{{ transaction.description }}</h3>
+                                <span class="cart-item-type">{{ transaction.date }}</span>
+                            </div>
+                            <div style="font-weight:700;font-size:1.05rem;
+                                {% if transaction.type == 'credit' %}color:var(--accent){% else %}color:#E74C3C{% endif %}">
+                                {% if transaction.type == 'credit' %}+{% else %}-{% endif %}{{ transaction.amount }} {{ store.currency|default('ر.س') }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state" style="padding:40px">
+                    <div class="empty-state-icon"><i class="ri-wallet-3-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد معاملات</h3>
+                    <p class="empty-state-desc">ستظهر معاملاتك هنا عند إجراء أي عملية</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

@@ -30,6 +30,8 @@
     "customer/wishlist",
     "customer/orders/index",
     "customer/orders/single",
+    "customer/wallet",
+    "landing-page",
     "404"
   ],
   "locales": ["ar", "en"]

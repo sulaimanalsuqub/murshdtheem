@@ -1,0 +1,94 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+
+    {# Landing Page Hero #}
+    <section style="background:linear-gradient(135deg,var(--primary),#8B7CF8);padding:80px 0;color:#fff;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-100px;right:-100px;width:300px;height:300px;background:rgba(255,255,255,0.05);border-radius:50%"></div>
+        <div class="container" style="position:relative;z-index:1">
+            {% if landing_page.image %}
+                <img src="{{ landing_page.image.url }}" alt="{{ landing_page.title }}" style="max-width:200px;margin:0 auto 24px;border-radius:var(--radius-lg)">
+            {% endif %}
+            <h1 style="font-size:2.5rem;font-weight:700;margin-bottom:16px">{{ landing_page.title|default('عرض خاص') }}</h1>
+            <p style="font-size:1.1rem;opacity:0.85;max-width:600px;margin:0 auto 32px;line-height:1.8">{{ landing_page.description }}</p>
+
+            {# Countdown Timer #}
+            {% if landing_page.end_date %}
+                <div style="display:flex;justify-content:center;gap:16px;margin-bottom:32px">
+                    <div style="background:rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:16px 20px;min-width:80px">
+                        <div id="countdown-days" style="font-size:2rem;font-weight:700">00</div>
+                        <div style="font-size:0.75rem;opacity:0.7;margin-top:4px">يوم</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:16px 20px;min-width:80px">
+                        <div id="countdown-hours" style="font-size:2rem;font-weight:700">00</div>
+                        <div style="font-size:0.75rem;opacity:0.7;margin-top:4px">ساعة</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:16px 20px;min-width:80px">
+                        <div id="countdown-minutes" style="font-size:2rem;font-weight:700">00</div>
+                        <div style="font-size:0.75rem;opacity:0.7;margin-top:4px">دقيقة</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.15);border-radius:var(--radius-md);padding:16px 20px;min-width:80px">
+                        <div id="countdown-seconds" style="font-size:2rem;font-weight:700">00</div>
+                        <div style="font-size:0.75rem;opacity:0.7;margin-top:4px">ثانية</div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <a href="#products" class="cta-btn"><i class="ri-shopping-bag-line"></i> تسوق الآن</a>
+        </div>
+    </section>
+
+    {# Landing Page Products #}
+    <section class="section" id="products">
+        <div class="container">
+            {% if landing_page.products|length > 0 %}
+                <div class="section-header">
+                    <h2 class="section-title">منتجات العرض</h2>
+                    <p class="section-subtitle">لا تفوت هذه الفرصة - العرض لفترة محدودة!</p>
+                </div>
+                <div class="products-grid">
+                    {% for product in landing_page.products %}
+                        {% include 'components/product-card.twig' with {product: product} %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="ri-calendar-event-line"></i></div>
+                    <h3 class="empty-state-title">لا توجد منتجات في هذا العرض حالياً</h3>
+                    <a href="/products" class="btn btn-primary">تصفح جميع المنتجات</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {# Landing Page Content #}
+    {% if landing_page.content %}
+        <section class="section" style="background:#fff">
+            <div class="container" style="max-width:800px">
+                <div style="color:var(--text-light);line-height:2;font-size:1rem">
+                    {{ landing_page.content|raw }}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{% if landing_page.end_date %}
+<script>
+(function() {
+    var endDate = new Date("{{ landing_page.end_date }}").getTime();
+    var timer = setInterval(function() {
+        var now = new Date().getTime();
+        var diff = endDate - now;
+        if (diff <= 0) { clearInterval(timer); return; }
+        document.getElementById('countdown-days').textContent = Math.floor(diff / 86400000);
+        document.getElementById('countdown-hours').textContent = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('countdown-minutes').textContent = Math.floor((diff % 3600000) / 60000);
+        document.getElementById('countdown-seconds').textContent = Math.floor((diff % 60000) / 1000);
+    }, 1000);
+})();
+</script>
+{% endif %}
+{% endblock %}
