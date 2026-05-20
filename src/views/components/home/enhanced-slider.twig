@@ -1,0 +1,35 @@
+{#
+| component.slides[].image       | string  | Image url
+| component.slides[].title       | ?string |
+| component.slides[].description | ?string |
+| component.slides[].without_overlay | bool |
+| position                       | int     | Sorting number start from zero
+#}
+<section class="s-block s-block--hero-slider s-block--full-bg">
+    <salla-slider
+        id="main-slider-{{ position }}"
+        auto-play
+        static-when-single
+        slider-config='{"lazy":"false"}'
+        {{ component.slides|length > 1 ? '' : 'show-controls="false"' }}
+        type="fullwidth">
+        <div slot="items">
+            {% for slide in component.slides %}
+                <div class="swiper-slide murshd-slide">
+                    <div class="murshd-slide__bg {{ slide.without_overlay ? '' : 'overlay-bg' }}"
+                         style="background-image: url({{ slide.image }});"></div>
+                    <div class="container murshd-slide__content">
+                        <div class="murshd-slide__text">
+                            {% if slide.title %}
+                                <h2 data-swiper-parallax="-500" class="murshd-slide__title">{{ slide.title }}</h2>
+                            {% endif %}
+                            {% if slide.description %}
+                                <p data-swiper-parallax="-300" class="murshd-slide__desc">{{ slide.description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </salla-slider>
+</section>

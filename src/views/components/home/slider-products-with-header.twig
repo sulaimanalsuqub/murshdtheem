@@ -1,0 +1,35 @@
+{#
+| component.background   | string
+| component.title        | ?string
+| component.description  | ?string
+| component.products     | Product[]
+| component.display_all_url | ?string
+| position               | int
+#}
+<section class="s-block s-block--slider-with-bg s-block--full-bg">
+    <div class="murshd-slider-bg" style="background-image: url('{{ component.background }}');">
+        <div class="container murshd-slider-bg__content">
+            {% if component.title %}
+                <h3 class="murshd-slider-bg__title">{{ component.title }}</h3>
+            {% endif %}
+            {% if component.description %}
+                <p class="murshd-slider-bg__desc">{{ component.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% set display_all = component.display_all_url %}
+    <div class="container murshd-slider-bg__products">
+        <salla-products-slider
+            {% if component.products|length %}
+                source="selected"
+                source-value="[{{ component.products|map((p) => p.id)|join(',') }}]"
+            {% endif %}
+            {% if display_all and display_all != '#' %}
+                display-all-url="{{ display_all }}"
+            {% endif %}
+            block-title=" "
+            slider-id="slider-with-bg-{{ position }}"
+        ></salla-products-slider>
+    </div>
+</section>

@@ -1,58 +1,93 @@
-<footer class="footer">
+<footer class="footer {{ theme.settings.get('footer_is_dark') ? 'footer--dark' : 'footer--light' }}">
     <div class="container">
         <div class="footer-grid">
-            <!-- Brand -->
+
+            {# Brand #}
             <div class="footer-brand">
-                <a href="/" class="logo">
-                    <div class="logo-icon">م</div>
-                    <span class="logo-text" style="color:#fff">{{ store.name|default('مرشد') }}</span>
+                <a href="{{ store.url }}" class="logo" aria-label="{{ store.name }}">
+                    {% if store.logo %}
+                        <img src="{{ store.logo }}" alt="{{ store.name }}" class="footer-logo" width="120" height="40">
+                    {% else %}
+                        <span class="logo-text">{{ store.name }}</span>
+                    {% endif %}
                 </a>
-                <p class="footer-brand-desc">
-                    وجهتك الأولى للمنتجات الرقمية عالية الجودة. نوفر لك أفضل القوالب، التصاميم، والأدوات التي تحتاجها لتطوير أعمالك.
-                </p>
+                {% if store.description %}
+                    <p class="footer-brand-desc">{{ store.description }}</p>
+                {% endif %}
+
+                {# Social Links #}
                 <div class="footer-social">
-                    <a href="#" class="social-link" aria-label="تويتر"><i class="ri-twitter-x-line"></i></a>
-                    <a href="#" class="social-link" aria-label="انستقرام"><i class="ri-instagram-line"></i></a>
-                    <a href="#" class="social-link" aria-label="واتساب"><i class="ri-whatsapp-line"></i></a>
-                    <a href="#" class="social-link" aria-label="يوتيوب"><i class="ri-youtube-line"></i></a>
+                    {% if store.social.twitter %}
+                        <a href="{{ store.social.twitter }}" class="social-link" aria-label="تويتر" target="_blank" rel="noreferrer noopener">
+                            <i class="sicon-twitter"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.instagram %}
+                        <a href="{{ store.social.instagram }}" class="social-link" aria-label="انستقرام" target="_blank" rel="noreferrer noopener">
+                            <i class="sicon-instagram"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.whatsapp %}
+                        <a href="{{ store.social.whatsapp }}" class="social-link" aria-label="واتساب" target="_blank" rel="noreferrer noopener">
+                            <i class="sicon-whatsapp"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.snapchat %}
+                        <a href="{{ store.social.snapchat }}" class="social-link" aria-label="سناب شات" target="_blank" rel="noreferrer noopener">
+                            <i class="sicon-snapchat"></i>
+                        </a>
+                    {% endif %}
+                    {% if store.social.youtube %}
+                        <a href="{{ store.social.youtube }}" class="social-link" aria-label="يوتيوب" target="_blank" rel="noreferrer noopener">
+                            <i class="sicon-youtube"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
-            <!-- Quick Links -->
+            {# Quick Links #}
             <div>
-                <h4 class="footer-title">روابط سريعة</h4>
+                <h4 class="footer-title">{{ trans('pages.footer.quick_links') }}</h4>
                 <div class="footer-links">
-                    <a href="/" class="footer-link">الرئيسية</a>
-                    <a href="/products" class="footer-link">المنتجات</a>
-                    <a href="/categories" class="footer-link">الأقسام</a>
-                    <a href="/pages/about" class="footer-link">من نحن</a>
+                    <a href="{{ store.url }}" class="footer-link">{{ trans('pages.home.title') }}</a>
+                    <a href="{{ link('products') }}" class="footer-link">{{ trans('pages.products.title') }}</a>
+                    <a href="{{ link('categories') }}" class="footer-link">{{ trans('pages.categories.title') }}</a>
+                    <a href="{{ link('brands') }}" class="footer-link">{{ trans('pages.brands.title') }}</a>
                 </div>
             </div>
 
-            <!-- Support -->
+            {# Support Links #}
             <div>
-                <h4 class="footer-title">الدعم</h4>
+                <h4 class="footer-title">{{ trans('pages.footer.support') }}</h4>
                 <div class="footer-links">
-                    <a href="/pages/contact" class="footer-link">تواصل معنا</a>
-                    <a href="/pages/faq" class="footer-link">الأسئلة الشائعة</a>
-                    <a href="/pages/terms" class="footer-link">الشروط والأحكام</a>
-                    <a href="/pages/privacy" class="footer-link">سياسة الخصوصية</a>
+                    {% for page in pages %}
+                        <a href="{{ page.url }}" class="footer-link">{{ page.title }}</a>
+                    {% endfor %}
                 </div>
             </div>
 
-            <!-- Contact -->
+            {# Contact #}
             <div>
-                <h4 class="footer-title">تواصل معنا</h4>
+                <h4 class="footer-title">{{ trans('pages.footer.contact') }}</h4>
                 <div class="footer-links">
-                    <span class="footer-link"><i class="ri-mail-line"></i> {{ store.email|default('info@murshd.com') }}</span>
-                    <span class="footer-link"><i class="ri-phone-line"></i> {{ store.phone|default('+966 50 000 0000') }}</span>
+                    {% if store.contacts.email %}
+                        <a href="mailto:{{ store.contacts.email }}" class="footer-link">
+                            <i class="sicon-email"></i> {{ store.contacts.email }}
+                        </a>
+                    {% endif %}
+                    {% if store.contacts.mobile %}
+                        <a href="tel:{{ store.contacts.mobile }}" class="footer-link">
+                            <i class="sicon-phone"></i> {{ store.contacts.mobile }}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
+
         </div>
 
         <div class="footer-bottom">
-            <span>&copy; {{ "now"|date("Y") }} {{ store.name|default('مرشد') }}. جميع الحقوق محفوظة</span>
-            <span>مدعوم بواسطة <a href="https://salla.com" style="color:var(--primary-light)">سلة</a></span>
+            <span>&copy; {{ "now" | date("Y") }} {{ store.name }}. {{ trans('pages.footer.all_rights') }}</span>
+            <span>{{ trans('pages.footer.powered_by') }} <a href="https://salla.com" target="_blank" rel="noreferrer">سلة</a></span>
         </div>
     </div>
 </footer>

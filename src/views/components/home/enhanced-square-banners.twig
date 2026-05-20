@@ -1,0 +1,28 @@
+{#
+| component.banners[].image       | string
+| component.banners[].url         | string
+| component.banners[].title       | ?string
+| component.banners[].description | ?string
+| position                        | int
+#}
+<section class="s-block s-block--banners container">
+    <div class="murshd-banners-grid murshd-banners-grid--{{ component.banners|length <= 3 ? component.banners|length : '3' }}">
+        {% for index, banner in component.banners %}
+            <a href="{{ banner.url }}"
+               aria-label="{{ banner.title ? banner.title : 'banner-' ~ index }}"
+               class="murshd-banner-entry lazy {{ banner.title ? 'has-overlay' : '' }}"
+               data-bg="{{ banner.image }}">
+                {% if banner.title or banner.description %}
+                    <article class="murshd-banner-entry__text">
+                        {% if banner.title %}
+                            <h3 class="murshd-banner__title">{{ banner.title }}</h3>
+                        {% endif %}
+                        {% if banner.description %}
+                            <p class="murshd-banner__description">{{ banner.description }}</p>
+                        {% endif %}
+                    </article>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</section>

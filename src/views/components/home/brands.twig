@@ -1,0 +1,32 @@
+{#
+| component.title   | ?string
+| component.brands  | Brand[]
+| position          | int
+#}
+{% set show_all = theme.settings.get('is_more_button_enabled') %}
+<section class="s-block s-block--logos-slider bg-gray-100">
+    <div class="container">
+        {% if component.title or show_all %}
+            <div class="s-block__title">
+                {% if component.title %}
+                    <div class="right-side">
+                        <h2>{{ component.title }}</h2>
+                    </div>
+                {% endif %}
+                {% if show_all %}
+                    <a href="{{ link('brands') }}" class="s-block__display-all">
+                        {{ trans('blocks.home.display_all') }} <i class="sicon-arrow-left"></i>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="murshd-brands-grid murshd-brands-grid--{{ component.brands|length > 5 ? 'multi' : 'few' }}">
+            {% for brand in component.brands %}
+                <a href="{{ brand.url }}" class="murshd-brand-item">
+                    <img src="{{ brand.logo }}" alt="{{ brand.name }}" width="200" height="100" loading="lazy">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>

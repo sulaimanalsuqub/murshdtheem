@@ -1,0 +1,47 @@
+{% extends "layouts/master.twig" %}
+
+{% block content %}
+<section class="murshd-customer-page">
+    <div class="container">
+        <div class="murshd-customer-layout">
+
+            {# Sidebar #}
+            <aside class="murshd-customer-sidebar">
+                <div class="murshd-customer-profile">
+                    <div class="murshd-customer-avatar">
+                        <img src="{{ user.avatar }}" alt="{{ user.name }}" width="80" height="80">
+                    </div>
+                    <h3 class="murshd-customer-name">{{ user.name }}</h3>
+                    <p class="murshd-customer-email">{{ user.email }}</p>
+                </div>
+
+                <nav class="murshd-customer-nav" aria-label="قائمة الحساب">
+                    <a href="{{ link('customer.profile') }}" class="murshd-customer-nav__link {{ page.slug == 'profile' ? 'active' : '' }}">
+                        <i class="sicon-user"></i> {{ trans('pages.profile.title') }}
+                    </a>
+                    <a href="{{ link('customer.orders') }}" class="murshd-customer-nav__link {{ page.slug == 'orders' ? 'active' : '' }}">
+                        <i class="sicon-orders"></i> {{ trans('pages.order.orders') }}
+                    </a>
+                    <a href="{{ link('customer.wishlist') }}" class="murshd-customer-nav__link {{ page.slug == 'wishlist' ? 'active' : '' }}">
+                        <i class="sicon-heart"></i> {{ trans('pages.wishlist.title') }}
+                    </a>
+                    {% if user.can_access_wallet %}
+                        <a href="{{ link('customer.wallet') }}" class="murshd-customer-nav__link {{ page.slug == 'wallet' ? 'active' : '' }}">
+                            <i class="sicon-wallet"></i> {{ trans('pages.wallet.title') }}
+                        </a>
+                    {% endif %}
+                    <a href="{{ link('customer.notifications') }}" class="murshd-customer-nav__link {{ page.slug == 'notifications' ? 'active' : '' }}">
+                        <i class="sicon-bell"></i> {{ trans('pages.notifications.title') }}
+                    </a>
+                </nav>
+            </aside>
+
+            {# Main Content #}
+            <div class="murshd-customer-main">
+                {% block customer_content %}{% endblock %}
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

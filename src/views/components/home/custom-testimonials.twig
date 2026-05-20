@@ -1,0 +1,49 @@
+{#
+| component.items[].name   | string
+| component.items[].avatar | string
+| component.items[].stars  | int
+| component.items[].text   | string
+| position                 | int
+#}
+<section class="s-block s-block--testimonials s-block--custom-testimonials container">
+    <div class="murshd-reviews-container">
+        <div class="murshd-reviews-header">
+            <h2 class="murshd-reviews-title">{{ trans('blocks.home.testimonials') }}</h2>
+        </div>
+
+        <salla-slider
+            id="custom-testimonials-{{ position }}-slider"
+            centered
+            slides-per-view="1"
+            type="testimonials"
+            class="testimonials-slider"
+            controls-outer
+            auto-play>
+            <div slot="items">
+                {% for index, item in component.items %}
+                    <div class="swiper-slide murshd-testimonial-slide">
+                        <div class="murshd-testimonial">
+                            <div class="murshd-testimonial__avatar">
+                                <img src="{{ item.avatar }}"
+                                     alt="{{ item.name | trim ? item.name : 'testimonial-' ~ index }}"
+                                     width="68" height="68" loading="lazy">
+                            </div>
+                            <div class="murshd-testimonial__body">
+                                <p class="murshd-testimonial__text">{{ item.text }}</p>
+                                <div class="murshd-testimonial__meta">
+                                    <h3 class="murshd-testimonial__name">{{ item.name }}</h3>
+                                    <salla-rating-stars size="small" value="{{ item.stars }}"></salla-rating-stars>
+                                </div>
+                            </div>
+                            <span class="murshd-testimonial__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                                    <path d="M8 12v-5.333c0-0.737-0.596-1.333-1.333-1.333-3.676 0-6.667 2.991-6.667 6.667v8c0 3.676 2.991 6.667 6.667 6.667h1.333c3.676 0 6.667-2.991 6.667-6.667v-1.333c0-3.676-2.991-6.667-6.667-6.667zM25.333 12v-5.333c0-0.737-0.596-1.333-1.333-1.333-3.676 0-6.667 2.991-6.667 6.667v8c0 3.676 2.991 6.667 6.667 6.667h1.333c3.676 0 6.667-2.991 6.667-6.667v-1.333c0-3.676-2.991-6.667-6.667-6.667z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </salla-slider>
+    </div>
+</section>
