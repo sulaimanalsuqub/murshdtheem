@@ -3,6 +3,8 @@
  * Digital Products Store Theme for Salla
  */
 
+import '@salla.sa/twilight';
+
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initCartCount();
