@@ -5,6 +5,11 @@
     },
     "repository": "https://github.com/sulaimanalsuqub/murshdtheem",
     "author_email": "SULAIMANALSUQUB@GMAIL.COM",
+    "support_url": "https://github.com/sulaimanalsuqub/murshdtheem",
+    "description": {
+        "ar": "ثيم مرشد - ثيم احترافي لبيع المنتجات الرقمية",
+        "en": "Murshd Theme - A professional theme for selling digital products"
+    },
     "features": [
         "mega-menu",
         "fonts",
